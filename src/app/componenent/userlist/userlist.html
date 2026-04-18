@@ -1,0 +1,97 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <a class="navbar-brand d-flex align-items-center" routerLink="/list" style="gap: 12px; width: 100%;">
+      <img src="assets/images/logo2.png" alt="Music Logo" width="60" height="60" style="object-fit: contain;" />
+      <span class="fw-bold fs-4 app-title">Music World</span>
+    </a>
+
+
+  <input type="text" class="form-control" placeholder="Search by username" [(ngModel)]="searchTerm"
+    style="max-width: 250px;" />
+  </div>
+</nav>
+
+
+
+
+<div class="userlist-container container mt-4">
+  <div class="header d-flex justify-content-between align-items-center mb-4">
+    <h2 class="title">
+      <i class="fa-solid fa-users mx-3"></i>Registered Users
+    </h2>
+    <button class="btn btn-add" (click)="navigateToAddUser()">
+      <i class="fa-solid fa-user-plus me-1"></i>Add User
+    </button>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="usersList.length" class="table-responsive">
+    <table class="table table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th scope="col" class="text-center">ProfileImage</th>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Status</th>
+          <th scope="col" class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of getDisplayedUsers()"
+          [ngClass]="{ 'table-success': user.isApproved, 'table-danger': !user.isApproved }">
+          <td class="text-center">
+            <img *ngIf="user.profileImagePath; else fallbackInitial" [src]="baseUrl + user.profileImagePath"
+              alt="{{ user.username }}" class="rounded-circle" width="60" height="60" style="object-fit: cover;" />
+            <ng-template #fallbackInitial>
+              <div class="fallback-avatar">
+                {{ user.username.charAt(0).toUpperCase() || '' }}
+              </div>
+            </ng-template>
+          </td>
+          <td class="fw-bold">{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span [class.text-success]="user.isApproved" [class.text-danger]="!user.isApproved" class="fw-semibold">
+              {{ user.isApproved ? 'Approved' : 'Pending' }}
+            </span>
+          </td>
+          <td class="text-center">
+            <button *ngIf="!user.isApproved" class="btn btn-success btn-sm me-2" (click)="acceptUser(user)">
+              <i class="bi bi-check-circle me-1"></i>Accept
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="declineUser(user)">
+              <i class="bi bi-x-circle me-1"></i>Decline
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="getDisplayedUsers().length === 0" class="text-center mt-3 text-light" style="font-size: 40px;">
+          <td colspan="5">
+            <i class="bi bi-emoji-frown me-2"></i>No username found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <nav *ngIf="totalPages > 1" aria-label="Page navigation example">
+    <ul class="pagination justify-content-center mt-3">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+      </li>
+
+      <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item"
+        [class.active]="currentPage === i + 1">
+        <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+      </li>
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

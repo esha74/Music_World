@@ -1,0 +1,125 @@
+/* Container */
+.userlist-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #2e2b4f, #1c1b29);
+  min-height: 100vh;
+  padding: 2rem;
+  border-radius: 12px;
+  color: #fefefe;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* Page Title */
+.title {
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: #eae3e3;
+  text-shadow: 0 0 10px rgba(107, 193, 140, 0.6);
+}
+
+/* Brand Title */
+.app-title {
+  color: #4B0082;
+  text-shadow: 0 0 8px rgba(123, 66, 246, 0.6);
+}
+
+/* Add User Button */
+.btn-add {
+  background: linear-gradient(90deg, #7b42f6, #53c0fd);
+  border: none;
+  font-weight: 600;
+  border-radius: 25px;
+  padding: 10px 22px;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(83, 192, 253, 0.4);
+  transition: all 0.3s ease;
+}
+.btn-add:hover {
+  box-shadow: 0 6px 20px rgba(83, 192, 253, 0.7);
+  transform: translateY(-2px);
+}
+
+/* Card Buttons */
+.btn {
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 6px 16px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-success {
+  background: linear-gradient(90deg, #32973e, #649c63);
+  border: none;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(94, 180, 126, 0.6);
+}
+.btn-success:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(17, 149, 43, 0.8);
+}
+
+.btn-danger {
+  background: linear-gradient(90deg, #ff5f6d, #e63673);
+  border: none;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(230, 54, 115, 0.6);
+}
+.btn-danger:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(230, 54, 115, 0.8);
+}
+
+/* Approved/Not Approved Card Backgrounds */
+.bg-light-success {
+  background-color: #e6ffed;
+  border: 2px solid #b2f2bb;
+  color: #155724;
+}
+
+.bg-light-danger {
+  background-color: #ffe6e9;
+  border: 2px solid #f5c6cb;
+  color: #721c24;
+}
+
+/* Profile Image */
+.card img {
+  border: 2px solid #dee2e6;
+}
+
+/* Fallback Avatar */
+.fallback-avatar {
+width: 60px;
+  height: 60px;
+  background-color: #4B0082;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  border-radius: 50%;
+  border: 2px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;             /* Prevent extra line height space */
+  object-fit: cover; 
+  
+}
+
+/* Empty State */
+.text-muted {
+  color: #ddd;
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-align: center;
+}
+.user-card {
+  box-shadow: 10px 10px 23px rgba(224, 230, 71, 0.25); /* Dark, soft shadow */
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+}
+
+.user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Hover effect */
+}

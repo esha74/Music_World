@@ -1,0 +1,126 @@
+.form-center-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff5f6d, #ffc371, #42a5f5, #7b42f6);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.card {
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.6);
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-body {
+  font-family: 'Montserrat', sans-serif;
+  padding: 2rem !important;
+  color: #fefefe;
+}
+
+.verify-title {
+  color: #ffdcfa;
+  text-shadow: 0 0 10px #53c0fd;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #fefefe;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+input.form-control {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  outline: none;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+input.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+input.form-control:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid #fff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+}
+
+.text-danger small {
+  font-weight: 600;
+  color: #ece452;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+.btn {
+  font-weight: 700;
+  border-radius: 25px;
+  padding: 10px 0;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-success {
+  background: linear-gradient(90deg, #53c0fd, #7b42f6);
+  border: none;
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(83, 192, 253, 0.7);
+}
+
+.btn-success:disabled {
+  background: rgba(83, 192, 253, 0.4);
+  cursor: not-allowed;
+}
+
+.btn-success:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(83, 192, 253, 0.9);
+}
+
+.btn-outline-primary {
+  border: 2px solid #53c0fd;
+  color: #53c0fd;
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 10px 0;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:disabled {
+  border-color: rgba(83, 192, 253, 0.4);
+  color: rgba(83, 192, 253, 0.4);
+  cursor: not-allowed;
+}
+
+.btn-outline-primary:hover:not(:disabled) {
+  background: #53c0fd;
+  color: #fff;
+}
+  
+.text-muted {
+  color: #bbb;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}

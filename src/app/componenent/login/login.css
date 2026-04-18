@@ -1,0 +1,115 @@
+/* Wrapper to center content and give rounded background */
+.login-wrapper {
+background: #9dacaf;
+background: linear-gradient(90deg, rgba(151, 186, 194, 1) 0%, rgba(51, 56, 52, 1) 100%, rgba(94, 85, 85, undefined) 0%);  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* Split layout for form and image */
+.login-container {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  height: 600px;
+  background: #000;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Form section styling */
+.login-form {
+  flex: 1;
+  padding: 40px;
+  background: #121212;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Right side image */
+.login-image {
+  flex: 1;
+}
+
+.login-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Logo styles */
+.logo-container {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.music-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px #ff6ec4);
+  margin-bottom: 12px;
+  border-radius: 50%;
+}
+
+.form-title {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #ff6ec4;
+}
+
+/* Input fields */
+.form-control {
+  background: #222;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #eee;
+  font-size: 1rem;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.form-control:focus {
+  background: #2f2f3f;
+  box-shadow: 0 0 8px #ff6ec4;
+  color: white;
+}
+
+/* Button */
+.btn-music {
+  background-color: #4c63d2;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-music:hover {
+  background-color: #ff6ec4;
+}
+
+/* Register link */
+.register-link {
+  color: #4c63d2;
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #ff6ec4;
+}
+
+.text-warning {
+  color: #ff6ec4 !important;
+}
