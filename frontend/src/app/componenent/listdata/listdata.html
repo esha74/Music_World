@@ -1,0 +1,140 @@
+<nav class="navbar navbar-expand-lg bg-white navbar-custom sticky-top">
+  <div class="container" style="height:50px">
+
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/home">
+      <img src="assets/images/logo2.png" alt="Music Logo" width="70" height="70" class="me-2"
+        style="object-fit: contain;" />
+      <span class="fw-bold fs-4 dark-purple-bg">Music World</span>
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
+      aria-controls="navbarButtons" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Items -->
+    <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarButtons"
+      style="background-color: white;">
+      <div class="d-flex gap-3 flex-column flex-lg-row">
+
+        <a (click)="AddMusic()" *ngIf="isAdmin" class="link-button btn-outline-primary">
+          <span class="me-2 fs-5">🎵</span> Add Music
+        </a>
+
+        <a (click)="toggleFavoriteFilter()" class="link-button btn-outline-secondary">
+          <span class="fs-5 me-2">❤️</span> {{ showFavoritesOnly ? 'Show All' : 'Show Favorites' }}
+        </a>
+
+        <a *ngIf="isAdmin" (click)="showAllUsers()" class="link-button btn-outline-dark">
+          <span class="me-2 fs-5">👥</span> Show All Users
+        </a>
+        <a *ngIf="isAdmin" (click)="showActivityLog()" class="link-button btn-outline-primary">
+          <span class="me-2 fs-5">📝</span> Show Activity Log
+        </a>
+
+
+        <!-- Profile Dropdown -->
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+
+            <!-- Profile Picture -->
+            <img *ngIf="storedProfileImage; else fallbackInitial" [src]="baseUrl + storedProfileImage" alt="Profile"
+              class="rounded-circle" width="40" height="40" style="object-fit: cover;" />
+
+            <!-- Fallback Initial -->
+            <ng-template #fallbackInitial>
+              <div class="fallback-initial rounded-circle d-flex justify-content-center align-items-center"
+                style="width: 40px; height: 40px; background-color: #4B0082; color: white; font-weight: bold; font-size: 20px; user-select: none;">
+                {{ username?.charAt(0)?.toUpperCase() || '' }}
+              </div>
+            </ng-template>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li><a class="dropdown-item" (click)="goEditProfile()" style="cursor:pointer;">✏️ Edit Profile</a></li>
+            <li class="dropdown-item"><strong>User Name: </strong>{{ username | uppercase }}</li>
+            <li class="dropdown-item"><strong>User Role: </strong>{{ userrole }}</li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item text-danger" (click)="logout()" style="cursor:pointer; font-weight: bolder;">🚪
+                Logout</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- Cards Section -->
+  <div *ngIf="filteredMusicList.length > 0; else noMusicFound">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 m-3">
+      <div class="col" *ngFor="let e of filteredMusicList">
+        <div class="card music-shadow h-100" (click)="openVideo(e.audio)" style="cursor: pointer; position: relative;">
+          <img [src]="e.image" class="card-img-top" [alt]="'Album art for ' + e.title" />
+
+          <!-- Favorite Heart Icon -->
+          <div (click)="toggleFavorite(e, $event)"
+            style="position: absolute; top: 8px; right: 8px; font-size: 33px; cursor: pointer;"
+            [style.color]="e.isFavorite ? 'red' : 'gray'">
+            {{ e.isFavorite ? '♥' : '♡' }}
+          </div>
+
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ e.title }}</h5>
+            <p class="card-text">
+              <strong>Artist:</strong> {{ e.artist }}<br />
+              <strong>Year:</strong> {{ e.year }}<br />
+              <strong>Genre:</strong> {{ e.genre }}
+            </p>
+            <button type="button" class="btn btn-warning" *ngIf="!isAdmin"
+              (click)="downloadMusic(e); $event.stopPropagation()">Download</button>
+
+            <div class="mt-auto d-flex gap-2" *ngIf="isAdmin">
+              <button type="button" class="btn btn-edit"
+                (click)="EditMusic(e.id!); $event.stopPropagation()">📝Edit</button>
+              <button type="button" class="btn btn-delete"
+                (click)="DeleteMusic(e.id!); $event.stopPropagation()">❌Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noMusicFound>
+    <div class="text-muted fs-4 d-flex flex-column justify-content-center align-items-center" style="min-height: 60vh;">
+      <i class="fa-solid fa-music" style="font-size: 6rem; color: rgb(234, 60, 60);"></i>
+      <span style="color: red; text-shadow: 1px 1px 6px rgba(255, 0, 0, 0.5);">
+        {{ showFavoritesOnly ? 'No favorite music found.' : 'No music available.' }}
+      </span>
+
+    </div>
+  </ng-template>
+
+
+
+  <!-- Video Modal Overlay -->
+  <div class="video-modal" *ngIf="showPlayer">
+    <div class="video-modal-content">
+      <button class="close-btn" (click)="closeVideo()">✖</button>
+      <div class="ratio ratio-16x9">
+        <iframe [src]="getSafeUrl(currentVideoUrl)" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="text-light text-center p-4 mt-5 footer-bg">
+  <div class="container">
+    <p class="mb-1">&copy; 2025 Music World. All rights reserved.</p>
+    <p class="mb-0">
+      <a href="#" class="text-light me-3">Privacy Policy</a>
+      <a href="#" class="text-light">Terms of Service</a>
+    </p>
+  </div>
+</footer>

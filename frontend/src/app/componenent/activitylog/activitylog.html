@@ -1,0 +1,62 @@
+  <a routerLink="/list" class="back-icon-link">
+  <img src="assets/images/icon1.png" alt="Back" width="50" height="50" />
+</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between align-items-center px-3 py-2 mb-3">
+  <h1 class="navbar-brand mb-0" style="color:#5d446e;"><i class="fas fa-tasks mx-3"></i>Activity Log</h1>
+
+  <div class="filters d-flex gap-3 flex-wrap align-items-center">
+    <input type="text" class="form-control filter-input" placeholder="Search Username" [(ngModel)]="searchUsername" />
+    <input type="text" class="form-control filter-input" placeholder="Search User ID" [(ngModel)]="searchUserId" />
+  </div>
+</nav>
+
+
+<div class="table-responsive my-3">
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>Action</th>
+        <th>Description</th>
+        <th>Timestamp</th>
+        <th>Delete</th> <!-- New header -->
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let log of pagedLogs">
+        <td>{{ log.id }}</td>
+        <td>{{ log.userId }}</td>
+        <td>{{ log.username }}</td>
+        <td>{{ log.action }}</td>
+        <td>{{ log.description }}</td>
+        <td>{{ log.timestamp | date:'medium' }}</td>
+        <td> <button class="btn btn-danger btn-sm" (click)="deleteLog(log.id)">
+          <i class="fas fa-trash"></i>
+        </button></td>
+         
+      </tr>
+      <tr *ngIf="pagedLogs.length === 0">
+        <td colspan="6" class="text-center">No records found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<nav *ngIf="totalPages > 1" aria-label="Page navigation example" class="pagination-container">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <button class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">Previous</button>
+    </li>
+    <li *ngFor="let page of [].constructor(totalPages); let i = index" 
+        class="page-item" 
+        [class.active]="currentPage === i + 1">
+      <button class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</button>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <button class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">Next</button>
+    </li>
+  </ul>
+</nav>

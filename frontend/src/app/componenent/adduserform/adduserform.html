@@ -1,0 +1,25 @@
+<div class="useradd-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate class="useradd-form">
+    <h2 class="form-title">Create New User</h2>
+
+    <div class="mb-3">
+      <label for="username">Username</label>
+      <input id="username" type="text" formControlName="username" class="form-control" placeholder="Enter username" />
+      <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid" class="text-danger">
+        Username is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" class="form-control" placeholder="Enter email address" />
+      <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="text-danger">
+        Please enter a valid email.
+      </div>
+    </div>
+
+    <button type="submit" class="btn" [disabled]="loading">
+      {{ loading ? 'Please wait...' : 'Add User' }}
+    </button>
+  </form>
+</div>

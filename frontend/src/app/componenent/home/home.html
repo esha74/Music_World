@@ -1,0 +1,116 @@
+<nav class="navbar navbar-expand-lg bg-light navbar-custom ">
+  <div class="container mb-2">
+
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/home">
+      <img src="assets/images/logo2.png" alt="Music Logo" width="70" height="70" class="me-2" style="object-fit: contain;" />
+      <span class="fw-bold fs-4 dark-purple-bg">Music World</span>
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
+      aria-controls="navbarButtons" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+       <!-- open -->
+    </button>
+
+    <!-- Navbar Buttons -->
+    <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarButtons">
+      <div class="d-flex gap-3">
+
+        <!-- Your other buttons like Add Music, Show Favorites etc. -->
+
+        <!-- Profile dropdown -->
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+            
+            <!-- Profile Picture -->
+            <img *ngIf="storedProfileImage; else fallbackInitial" [src]="baseUrl + storedProfileImage" alt="Profile" class="rounded-circle" width="40" height="40" style="object-fit: cover;" />
+            
+            <!-- Fallback Initial -->
+            <ng-template #fallbackInitial>
+              <div class="fallback-initial rounded-circle d-flex justify-content-center align-items-center"
+                   style="width: 40px; height: 40px; background-color: #4B0082; color: white; font-weight: bold; font-size: 20px; user-select: none;">
+                {{ user?.charAt(0)?.toUpperCase() || '' }}
+              </div>
+            </ng-template>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+             <li><a class="dropdown-item" (click)="goEditProfile()" style="cursor:pointer;">✏️ Edit Profile</a></li>
+            <li class="dropdown-item"><strong>User Name: </strong>{{ user | uppercase }}</li>
+            <li class="dropdown-item"><strong>User Role: </strong>{{ userrole }}</li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="goChangePassword()" style="cursor:pointer;">🔑 Change Password</a></li>
+            <li><a class="dropdown-item text-danger" (click)="logout()" style="cursor:pointer; font-weight: bolder;">🚪 Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<main>
+<div class="music-home-banner">
+  <div class="overlay"></div>
+
+  <div class="welcome-content text-center">
+    <h1 class="display-3 fw-bold glow-text">Welcome, {{user|uppercase}}! 🎧</h1>
+    <h2 class="mb-4 text-light">Your personalized music experience starts now</h2>
+    <p class="lead mb-5 text-light">
+      Listen, discover, and save your favorite tracks. All in one place.
+    </p>
+    <button routerLink="/list" class="btn btn-purple btn-lg px-4 shadow">Explore Music</button>
+  </div>
+</div>
+<div class="container-fuild bg-light py-1">
+  <div id="musicCarousel" class="carousel slide m-3" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-inner rounded shadow-lg">
+      <div class="carousel-item active">
+        <img src="assets/images/Photo9.jpg" class="d-block   mx-auto carousel-img" alt="Concert">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/Photo6.jpg" class="d-block mx-auto carousel-img" alt="Headphones">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/Photo7.jpg" class="d-block mx-auto carousel-img" alt="Piano">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/Photo8.jpg" class="d-block mx-auto carousel-img" alt="Vinyl">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/Photo1.jpg" class="d-block mx-auto carousel-img" alt="Guitar">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/Photo3.jpg" class="d-block mx-auto carousel-img" alt="Stage">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/Photo2.jpg" class="d-block mx-auto carousel-img" alt="Stage">
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#musicCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#musicCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+</main>
+
+
+
+<!-- Footer -->
+<footer class="text-light text-center p-4 mt-1">
+  <div class="container">
+    <p class="mb-1">&copy; 2025 Music World. All rights reserved.</p>
+    <p class="mb-0">
+      <a href="#" class="text-light me-3">Privacy Policy</a>
+      <a href="#" class="text-light">Terms of Service</a>
+    </p>
+  </div>
+</footer>

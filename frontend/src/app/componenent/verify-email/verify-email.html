@@ -1,0 +1,65 @@
+<div class="form-center-container">
+  <div class="card shadow border-0">
+    <div class="card-body p-4 text-white">
+      <h3 class="text-center mb-4 verify-title">🎵 Verify Your Email</h3>
+
+      <form [formGroup]="verifyForm" (ngSubmit)="onVerify()">
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="form-control"
+            readonly
+          />
+          <div *ngIf="verifyForm.get('email')?.invalid && verifyForm.get('email')?.touched" class="text-danger mt-1">
+            <small *ngIf="verifyForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small *ngIf="verifyForm.get('email')?.errors?.['email']">Invalid email format.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="otp" class="form-label fw-semibold">Enter OTP</label>
+          <input
+            id="otp"
+            type="text"
+            maxlength="6"
+            formControlName="otp"
+            class="form-control"
+            placeholder="Enter 6-digit OTP"
+          />
+          <div *ngIf="verifyForm.get('otp')?.invalid && verifyForm.get('otp')?.touched" class="text-danger mt-1">
+            <small *ngIf="verifyForm.get('otp')?.errors?.['required']">OTP is required.</small>
+            <small *ngIf="verifyForm.get('otp')?.errors?.['minlength'] || verifyForm.get('otp')?.errors?.['maxlength']">
+              OTP must be 6 digits.
+            </small>
+          </div>
+        </div>
+
+        <div class="d-grid gap-4">
+          <button
+            class="btn btn-success"
+            type="submit"
+            [disabled]="isLoading || verifyForm.invalid"
+          >
+            {{ isLoading ? 'Verifying...' : '✅ Verify Email' }}
+          </button>
+
+          <button
+            class="btn btn-outline-primary"
+            type="button"
+            (click)="resendOtp()"
+            [disabled]="isLoading"
+          >
+            🔁 Resend OTP
+          </button>
+        </div>
+      </form>
+
+      <div class="text-center mt-3 text-muted">
+        Need help? Contact support@musicapp.com
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="container mt-5" style="max-width: 400px;">
+  <h2>Subscribe to Unlock Downloads</h2>
+  <p>Subscribe and get unlimited access to all music downloads.</p>
+  <div #paypalSubscriptionBtn></div>
+  <button class="btn btn-primary w-100" [disabled]="isLoading" hidden>
+    {{ isLoading ? 'Processing...' : 'Subscribe Now' }}
+  </button>
+</div>

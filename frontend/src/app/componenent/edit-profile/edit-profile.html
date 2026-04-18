@@ -1,0 +1,41 @@
+<div class="useradd-container">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="edit-form">
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username:</label>
+      <input formControlName="username" id="username" class="form-control" placeholder="Enter username" />
+      <div *ngIf="profileForm.get('username')?.touched && profileForm.get('username')?.invalid" class="text-danger small mt-1">
+        Username is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="profileImage" class="form-label">Profile Image:</label>
+      <input type="file" id="profileImage" class="form-control" (change)="onFileChange($event)" />
+
+      <div class="mt-2">
+        <img
+          *ngIf="previewImageUrl; else existingImage"
+          [src]="previewImageUrl"
+          alt="Preview"
+          width="80"
+          class="img-thumbnail"
+        />
+        <ng-template #existingImage>
+          <img
+            *ngIf="existingImagePath"
+            [src]="baseUrl + existingImagePath"
+            alt="Profile"
+            width="80"
+            class="img-thumbnail"
+          />
+        </ng-template>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+      Update Profile
+    </button>
+
+  </form>
+</div>
